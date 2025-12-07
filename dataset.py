@@ -37,11 +37,9 @@ class SwinIRDataset(Dataset):
         hr_path = self.hr_files[idx]
         lr_path = self.lr_files[idx]
 
-        # open images
         hr_image = Image.open(hr_path).convert('RGB')
         lr_image = Image.open(lr_path).convert('RGB')
 
-        # crop if needed
         if self.patch_size is not None:
             w, h = lr_image.size
             tp = self.patch_size
@@ -59,10 +57,8 @@ class SwinIRDataset(Dataset):
             else:
                 pass
 
-        # to tensor and normalize
         hr_tensor = self.to_tensor(hr_image)
         lr_tensor = self.to_tensor(lr_image)
-
 
         return {'LR': lr_tensor, 'HR': hr_tensor}
 

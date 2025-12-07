@@ -38,7 +38,6 @@ def train():
     # dataset setup
     # turn off debug mode for actual training run
     train_dataset = SwinIRDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE)
-
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True)
 
     model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=2)
@@ -46,8 +45,7 @@ def train():
 
     criterion = nn.L1Loss()
     optimizer = optim.Adam(model.parameters(), lr=LR_RATE)
-    scaler = GradScaler() # for mixed precision
-
+    scaler = GradScaler()
 
     start_epoch = 0
 
@@ -63,6 +61,7 @@ def train():
         print("[INFO] No checkpoint found. Starting from scratch.")
 
 
+    avg_loss = 0.0
     model.train()
     for epoch in range(start_epoch, EPOCHS):
         epoch_loss = 0.0
@@ -83,7 +82,6 @@ def train():
             scaler.step(optimizer)
             scaler.update()
 
-
             epoch_loss += loss.item()
 
         avg_loss = epoch_loss / len(train_loader)
@@ -91,12 +89,8 @@ def train():
         if (epoch + 1) % PRINT_INTERVAL == 0:
             print(f"Epoch [{epoch+1}/{EPOCHS}] Loss: {avg_loss:.6f}")
 
-
-
         if (epoch + 1) % SAVE_INTERVAL == 0:
             print(f"[INFO] Saving checkpoint at epoch {epoch+1}...")
-
-
 
             torch.save({
                 'epoch': epoch,
@@ -106,8 +100,6 @@ def train():
             }, CHECKPOINT_PATH)
 
     print("[INFO] Training finished.")
-
-
 
     torch.save({
         'epoch': EPOCHS,

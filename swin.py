@@ -6,30 +6,33 @@ import os
 import math
 from model import SwinIR
 
-def inference(image_path, model_path='final_model.pth', output_path='result.png', tile_size=512, tile_overlap=32):
+import argparse
+
+def inference(args):
+    tile_size = args.tile_size
     if torch.cuda.is_available():
         vram = torch.cuda.get_device_properties(0).total_memory / 1024**3
         print(f"[INFO] Detected GPU VRAM: {vram:.2f} GB")
         torch.backends.cudnn.benchmark = True
 
-        if vram < 4.0:
-            print("[WARN] Low VRAM. Tile size set to 256.")
+        if vram < 4.0 and tile_size > 256:
+            print("[WARN] Low VRAM. Reducing tile size to 256.")
             tile_size = 256
-
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"[INFO] Using device: {device}")
 
-    model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=2)
+    # note: depths/embed_dim must match training. scale is configurable.
+    print(f"[INFO] Initializing SwinIR model (Scale: {args.scale}x)...")
+    model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=args.scale)
     model = model.to(device)
 
     if device.type == 'cuda':
         model.half()
 
-
-    if os.path.exists(model_path):
-        print(f"[INFO] Loading weights from {model_path}...")
-        checkpoint = torch.load(model_path, map_location=device)
+    if os.path.exists(args.model):
+        print(f"[INFO] Loading weights from {args.model}...")
+        checkpoint = torch.load(args.model, map_location=device)
 
         if 'model_state_dict' in checkpoint:
             state_dict = checkpoint['model_state_dict']
@@ -38,16 +41,16 @@ def inference(image_path, model_path='final_model.pth', output_path='result.png'
 
         model.load_state_dict(state_dict)
     else:
-        print(f"[ERROR] Model file '{model_path}' not found. Please train the model first.")
+        print(f"[ERROR] Model file '{args.model}' not found. Please train first.")
         return
 
     model.eval()
 
-    if not os.path.exists(image_path):
-        print(f"[ERROR] Image '{image_path}' not found.")
+    if not os.path.exists(args.input):
+        print(f"[ERROR] Image '{args.input}' not found.")
         return
 
-    img = Image.open(image_path).convert('RGB')
+    img = Image.open(args.input).convert('RGB')
     w, h = img.size
     print(f"Original Size: {w}x{h}")
 
@@ -57,13 +60,12 @@ def inference(image_path, model_path='final_model.pth', output_path='result.png'
     if device.type == 'cuda':
         img_tensor = img_tensor.half()
 
-
     b, c, h, w = img_tensor.shape
     tile = min(tile_size, h, w)
+    tile_overlap = 32
     stride = tile - tile_overlap
 
-    # scale factor
-    sf = 2
+    sf = args.scale
 
     h_idx_list = list(range(0, h-tile, stride)) + [h-tile]
     w_idx_list = list(range(0, w-tile, stride)) + [w-tile]
@@ -76,9 +78,10 @@ def inference(image_path, model_path='final_model.pth', output_path='result.png'
     with torch.no_grad():
         for h_idx in h_idx_list:
             for w_idx in w_idx_list:
-
                 in_patch = img_tensor[..., h_idx:h_idx+tile, w_idx:w_idx+tile]
                 out_patch = model(in_patch)
+
+                out_patch = out_patch[..., :tile*sf, :tile*sf]
                 out_patch_mask = torch.ones_like(out_patch)
 
                 E[..., h_idx*sf:(h_idx+tile)*sf, w_idx*sf:(w_idx+tile)*sf].add_(out_patch)
@@ -94,14 +97,18 @@ def inference(image_path, model_path='final_model.pth', output_path='result.png'
     w_out, h_out = output_img.size
     print(f"Output Size: {w_out}x{h_out}")
 
-    output_img.save(output_path)
-    print(f"[INFO] Saved result to {output_path}")
+    output_img.save(args.output)
+    print(f"[INFO] Saved result to {args.output}")
 
 if __name__ == "__main__":
-    test_img = "data/test_lr.png"
-    if not os.path.exists(test_img):
-        print(f"[WARN] {test_img} not found, generating dummy...")
-        os.makedirs("data", exist_ok=True)
-        Image.new('RGB', (32, 32), color='blue').save(test_img)
+    parser = argparse.ArgumentParser(description='SwinIR Super-Resolution CLI')
 
-    inference(test_img)
+    parser.add_argument('-i', '--input', type=str, required=True, help='Path to input image')
+    parser.add_argument('-o', '--output', type=str, default='result.png', help='Path to save output image')
+    parser.add_argument('-m', '--model', type=str, default='final_model.pth', help='Path to model checkpoint')
+    parser.add_argument('-s', '--scale', type=int, default=2, help='Upscale factor (default: 2)')
+    parser.add_argument('-t', '--tile_size', type=int, default=512, help='Tile size for inference (default: 512)')
+
+    args = parser.parse_args()
+
+    inference(args)

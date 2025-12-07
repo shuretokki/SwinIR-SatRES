@@ -1,10 +1,10 @@
 import os
 import glob
 from PIL import Image
+Image.MAX_IMAGE_PIXELS = None
 
-def prepare_dataset(hr_sourcedir='data/train'):
-    # prepares dataset: fixes hr to mult of 4, generates 4x lr
-
+def prepare_dataset(hr_sourcedir='data/train', limit=300):
+    # prepares dataset, fixes hr to mult of 4, generates 4x lr
     if not os.path.exists(hr_sourcedir) and os.path.exists('data/train'):
         hr_sourcedir = 'data/train'
 
@@ -14,15 +14,17 @@ def prepare_dataset(hr_sourcedir='data/train'):
     os.makedirs(hr_fixed_dir, exist_ok=True)
     os.makedirs(lr_dir, exist_ok=True)
 
-    # find images
-    extensions = ['*.png', '*.jpg', '*.jpeg', '*.BMP']
+    extensions = ['png', 'jpg', 'jpeg', 'BMP', 'tif', 'tiff']
     files = []
     for ext in extensions:
-        files.extend(glob.glob(os.path.join(hr_sourcedir, ext)))
-        # check CAPS too
-        files.extend(glob.glob(os.path.join(hr_sourcedir, ext.upper())))
+        files.extend(glob.glob(os.path.join(hr_sourcedir, '**', f'*.{ext}'), recursive=True))
+        files.extend(glob.glob(os.path.join(hr_sourcedir, '**', f'*.{ext.upper()}'), recursive=True))
 
-    files = sorted(list(set(files))) # Remove duplicates if any
+    files = sorted(list(set(files)))
+
+    if limit is not None and len(files) > limit:
+        print(f"[WARN] Limiting dataset to first {limit} images (disk safety)")
+        files = files[:limit]
 
     print(f"[INFO] Found {len(files)} images in {hr_sourcedir}")
 
@@ -38,32 +40,40 @@ def prepare_dataset(hr_sourcedir='data/train'):
                 img = img.convert('RGB')
                 w, h = img.size
 
-                # 1. crop to multiple of 4
-                w_new = w - (w % 4)
-                h_new = h - (h % 4)
+                patch_size = 512
+                stride = 512
 
-                if w_new != w or h_new != h:
-                    # just crop top-left
-                    img_fixed = img.crop((0, 0, w_new, h_new))
-                else:
-                    img_fixed = img
+                w, h = img.size
 
-                # save fixed hr
-                img_fixed.save(os.path.join(hr_fixed_dir, filename))
-                last_hr_shape = img_fixed.size
+                # if image is too small, just keep it (unless tiny)
+                if w < patch_size or h < patch_size:
+                    w_new = w - (w % 4)
+                    h_new = h - (h % 4)
+                    if w_new < 16 or h_new < 16: continue # skip garbage
+                    img_fixed = img.crop((0,0,w_new,h_new))
+                    save_name = f"{os.path.splitext(filename)[0]}.png"
 
-                # 2. downscale 4x
-                # bicubic is standard
-                lr_w = w_new // 4
-                lr_h = h_new // 4
+                    img_fixed.save(os.path.join(hr_fixed_dir, save_name))
+                    img_fixed.resize((w_new//4, h_new//4), Image.BICUBIC).save(os.path.join(lr_dir, save_name))
+                    count += 1
+                    continue
 
-                img_lr = img_fixed.resize((lr_w, lr_h), Image.BICUBIC)
+                for x in range(0, w - patch_size + 1, stride):
+                    for y in range(0, h - patch_size + 1, stride):
+                        img_patch = img.crop((x, y, x + patch_size, y + patch_size))
 
-                # save lr
-                img_lr.save(os.path.join(lr_dir, filename))
-                last_lr_shape = img_lr.size
+                        # save HR (as PNG)
+                        save_name = f"{os.path.splitext(filename)[0]}_{x}_{y}.png"
+                        img_patch.save(os.path.join(hr_fixed_dir, save_name))
 
-                count += 1
+                        # generate & save LR
+                        img_lr = img_patch.resize((patch_size//4, patch_size//4), Image.BICUBIC)
+                        img_lr.save(os.path.join(lr_dir, save_name))
+
+                        count += 1
+                        last_hr_shape = img_patch.size
+                        last_lr_shape = img_lr.size
+
 
         except Exception as e:
             print(f"[ERROR] processing {filename}: {e}")

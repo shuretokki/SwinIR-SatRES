@@ -83,4 +83,10 @@ def prepare_dataset(hr_sourcedir='data/train', limit=300):
         print(f"Sample verification - HR shape: {last_hr_shape}, LR shape: {last_lr_shape}")
 
 if __name__ == "__main__":
-    prepare_dataset()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--source', type=str, default='data/train', help='Path to source HR images')
+    parser.add_argument('--limit', type=int, default=500, help='Limit number of images')
+    args = parser.parse_args()
+
+    prepare_dataset(hr_sourcedir=args.source, limit=args.limit)

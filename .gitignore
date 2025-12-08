@@ -34,5 +34,6 @@ data/
 
 .vscode/
 .idea/
+.agent/
 
 __marimo__/

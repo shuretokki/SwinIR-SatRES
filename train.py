@@ -43,6 +43,10 @@ def train(args):
     model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=2)
     model = model.to(DEVICE)
 
+    if torch.cuda.device_count() > 1:
+        print(f"[INFO] Detected {torch.cuda.device_count()} GPUs. Enabling Multi-GPU")
+        model = nn.DataParallel(model)
+
     criterion = nn.L1Loss()
     optimizer = optim.Adam(model.parameters(), lr=LR_RATE)
     scaler = GradScaler()

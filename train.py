@@ -21,7 +21,7 @@ def train(args):
     LR_RATE = 2e-4
 
     CHECKPOINT_PATH = "checkpoint.pth"
-    SAVE_INTERVAL = 500
+    SAVE_INTERVAL = 10
     PRINT_INTERVAL = 1
 
     HR_DIR = 'data/train_hr'
@@ -36,10 +36,10 @@ def train(args):
 
     # dataset setup
     # turn off debug mode for actual training run
-    train_dataset = SwinIRDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE)
+    train_dataset = SwinIRDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE, upscale_factor=args.upscale)
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True, persistent_workers=True)
 
-    model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=2)
+    model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=args.upscale)
     model = model.to(DEVICE)
 
     if torch.cuda.device_count() > 1:
@@ -121,6 +121,7 @@ if __name__ == "__main__":
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size (default: 16)')
     parser.add_argument('--patch_size', type=int, default=48, help='Patch size (default: 48)')
     parser.add_argument('--epochs', type=int, default=5000, help='Total epochs (default: 5000)')
+    parser.add_argument('--upscale', type=int, default=4, help='Upscale factor (default: 4)')
     args = parser.parse_args()
 
     train(args)

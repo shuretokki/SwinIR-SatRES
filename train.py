@@ -1,3 +1,11 @@
+"""
+SwinIR Training Implementation
+Based on: https://github.com/JingyunLiang/SwinIR
+
+This script implements a training pipeline for SwinIR optimized for Satellite Imagery (xView),
+utilizing generic Data Augmentation, AMP (Automatic Mixed Precision), and Tiled Processing.
+"""
+
 import os
 import torch
 import torch.nn as nn

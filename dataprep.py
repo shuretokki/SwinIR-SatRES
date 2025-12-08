@@ -1,9 +1,26 @@
+"""
+Data Preparation Script for SwinIR Satellite Imagery Project.
+
+This script processes large satellite images (e.g., xView) by:
+1. Handling large TIFF/GeoTIFF files.
+2. Slicing them into manageable patches (default 512x512).
+3. Generating corresponding Low-Resolution (LR) inputs via bicubic downsampling.
+4. Organizing data into `train_hr` and `train_lr` directories.
+"""
+
 import os
 import glob
 from PIL import Image
-Image.MAX_IMAGE_PIXELS = None
 
+Image.MAX_IMAGE_PIXELS = None
 def prepare_dataset(hr_sourcedir='data/train', limit=300):
+    """
+    Prepares the training dataset by slicing large images and generating LR counterparts.
+
+    Args:
+        hr_sourcedir (str): Path to the source directory containing high-resolution images.
+        limit (int): Maximum number of source images to process (to prevent disk overflow).
+    """
     # prepares dataset, fixes hr to mult of 4, generates 4x lr
     if not os.path.exists(hr_sourcedir) and os.path.exists('data/train'):
         hr_sourcedir = 'data/train'

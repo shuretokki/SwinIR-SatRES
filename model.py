@@ -1,3 +1,22 @@
+"""
+SwinIR: Image Restoration Using Swin Transformer
+Paper: https://arxiv.org/abs/2108.10257
+Original Repo: https://github.com/JingyunLiang/SwinIR
+
+Authors: Jingyun Liang, Jiezhang Cao, Guolei Sun, Kai Zhang, Luc Van Gool, Radu Timofte
+
+Reference:
+@inproceedings{liang2021swinir,
+  title={SwinIR: Image Restoration Using Swin Transformer},
+  author={Liang, Jingyun and Cao, Jiezhang and Sun, Guolei and Zhang, Kai and Van Gool, Luc and Timofte, Radu},
+  booktitle={IEEE/CVF International Conference on Computer Vision Workshops},
+  pages={1833--1844},
+  year={2021}
+}
+
+Adapted for SwinIR-SatRes (Satellite Imagery Super-Resolution)
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

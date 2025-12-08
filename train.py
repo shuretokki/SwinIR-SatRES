@@ -22,9 +22,8 @@ def train(args):
 
     CHECKPOINT_PATH = "checkpoint.pth"
     SAVE_INTERVAL = 500
-    PRINT_INTERVAL = 100
+    PRINT_INTERVAL = 1
 
-    # folder setup
     HR_DIR = 'data/train_hr'
     LR_DIR = 'data/train_lr'
 

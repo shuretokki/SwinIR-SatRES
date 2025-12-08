@@ -57,6 +57,18 @@ class SwinIRDataset(Dataset):
             else:
                 pass
 
+        if random.random() < 0.5:
+            hr_image = TF.hflip(hr_image)
+            lr_image = TF.hflip(lr_image)
+
+        if random.random() < 0.5:
+            hr_image = TF.vflip(hr_image)
+            lr_image = TF.vflip(lr_image)
+
+        if random.random() < 0.5:
+            hr_image = TF.rotate(hr_image, 90)
+            lr_image = TF.rotate(lr_image, 90)
+
         hr_tensor = self.to_tensor(hr_image)
         lr_tensor = self.to_tensor(lr_image)
 

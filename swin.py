@@ -105,7 +105,6 @@ def inference(args):
             for w_idx in w_idx_list:
                 in_patch = img_tensor[..., h_idx:h_idx+tile, w_idx:w_idx+tile]
 
-                # Auto-pad to multiple of window_size (8)
                 _, _, h_old, w_old = in_patch.size()
                 h_pad = (h_old // window_size + 1) * window_size - h_old if h_old % window_size != 0 else 0
                 w_pad = (w_old // window_size + 1) * window_size - w_old if w_old % window_size != 0 else 0
@@ -116,7 +115,6 @@ def inference(args):
 
                 out_patch = model(in_patch)
 
-                # Crop back to original size * scale
                 if h_pad > 0 or w_pad > 0:
                      out_patch = out_patch[..., :h_old*args.scale, :w_old*args.scale]
 

@@ -38,7 +38,7 @@ def train(args):
     # dataset setup
     # turn off debug mode for actual training run
     train_dataset = SwinIRDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE)
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True, persistent_workers=True)
 
     model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=2)
     model = model.to(DEVICE)
@@ -48,7 +48,9 @@ def train(args):
         model = nn.DataParallel(model)
 
     criterion = nn.L1Loss()
-    optimizer = optim.Adam(model.parameters(), lr=LR_RATE)
+
+    optimizer = optim.AdamW(model.parameters(), lr=LR_RATE, betas=(0.9, 0.999), weight_decay=1e-4)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=EPOCHS, eta_min=1e-7)
     scaler = GradScaler()
 
     start_epoch = 0
@@ -87,6 +89,8 @@ def train(args):
             scaler.update()
 
             epoch_loss += loss.item()
+
+        scheduler.step()
 
         avg_loss = epoch_loss / len(train_loader)
 

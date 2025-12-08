@@ -9,24 +9,24 @@ from model import SwinIR
 from torch.cuda.amp import autocast, GradScaler
 import math
 
-def train():
+def train(args):
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     if DEVICE.type == 'cuda':
         torch.backends.cudnn.benchmark = True
 
-    EPOCHS = 5000
-    BATCH_SIZE = 16
-    PATCH_SIZE = 48
+    EPOCHS = args.epochs
+    BATCH_SIZE = args.batch_size
+    PATCH_SIZE = args.patch_size
     LR_RATE = 2e-4
 
     CHECKPOINT_PATH = "checkpoint.pth"
     SAVE_INTERVAL = 500
-    PRINT_INTERVAL = 10
+    PRINT_INTERVAL = 100
 
-    # paths (relative bc kaggle mount points r weird sometimes)
-    HR_DIR = "data/train_hr"
-    LR_DIR = "data/train_lr"
+    # folder setup
+    HR_DIR = 'data/train_hr'
+    LR_DIR = 'data/train_lr'
 
     if not os.path.exists(HR_DIR): HR_DIR = 'data/train_HR'
     if not os.path.exists(LR_DIR): LR_DIR = 'data/train_LR'
@@ -109,4 +109,11 @@ def train():
     }, "final_model.pth")
 
 if __name__ == "__main__":
-    train()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--batch_size', type=int, default=16, help='Batch size (default: 16)')
+    parser.add_argument('--patch_size', type=int, default=48, help='Patch size (default: 48)')
+    parser.add_argument('--epochs', type=int, default=5000, help='Total epochs (default: 5000)')
+    args = parser.parse_args()
+
+    train(args)

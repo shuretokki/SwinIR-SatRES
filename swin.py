@@ -1,10 +1,3 @@
-"""
-SwinIR CLI Tool for Image Super-Resolution.
-
-This script provides a Command Line Interface (CLI) to run SwinIR inference on images.
-It supports tiled processing to handle large images on limited VRAM and automatic mixed precision.
-"""
-
 import torch
 import torch.nn as nn
 from torchvision import transforms
@@ -17,8 +10,6 @@ import argparse
 
 def inference(args):
     """
-    Runs SwinIR inference on a single image.
-
     Args:
         args (Namespace): Parsed command-line arguments containing:
                           - input: Path to input image.

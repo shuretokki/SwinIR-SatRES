@@ -14,69 +14,151 @@
 
 @misc{wang_esrgan_2018,
 	title = {{ESRGAN}: {Enhanced} {Super}-{Resolution} {Generative} {Adversarial} {Networks}},
-	copyright = {arXiv.org perpetual, non-exclusive license},
-	shorttitle = {{ESRGAN}},
 	url = {https://arxiv.org/abs/1809.00219},
-	doi = {10.48550/ARXIV.1809.00219},
-	abstract = {The Super-Resolution Generative Adversarial Network (SRGAN) is a seminal work that is capable of generating realistic textures during single image super-resolution. However, the hallucinated details are often accompanied with unpleasant artifacts. To further enhance the visual quality, we thoroughly study three key components of SRGAN - network architecture, adversarial loss and perceptual loss, and improve each of them to derive an Enhanced SRGAN (ESRGAN). In particular, we introduce the Residual-in-Residual Dense Block (RRDB) without batch normalization as the basic network building unit. Moreover, we borrow the idea from relativistic GAN to let the discriminator predict relative realness instead of the absolute value. Finally, we improve the perceptual loss by using the features before activation, which could provide stronger supervision for brightness consistency and texture recovery. Benefiting from these improvements, the proposed ESRGAN achieves consistently better visual quality with more realistic and natural textures than SRGAN and won the first place in the PIRM2018-SR Challenge. The code is available at https://github.com/xinntao/ESRGAN .},
-	urldate = {2025-12-08},
 	publisher = {arXiv},
 	author = {Wang, Xintao and Yu, Ke and Wu, Shixiang and Gu, Jinjin and Liu, Yihao and Dong, Chao and Loy, Chen Change and Qiao, Yu and Tang, Xiaoou},
-	year = {2018},
-	note = {Version Number: 2},
-	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences},
-	annote = {Other
-To appear in ECCV 2018 workshop. Won Region 3 in the PIRM2018-SR Challenge. Code and models are at https://github.com/xinntao/ESRGAN},
+	year = {2018}
 }
 
 @misc{liang_swinir_2021,
 	title = {{SwinIR}: {Image} {Restoration} {Using} {Swin} {Transformer}},
-	copyright = {Creative Commons Attribution Non Commercial No Derivatives 4.0 International},
-	shorttitle = {{SwinIR}},
 	url = {https://arxiv.org/abs/2108.10257},
-	doi = {10.48550/ARXIV.2108.10257},
-	abstract = {Image restoration is a long-standing low-level vision problem that aims to restore high-quality images from low-quality images (e.g., downscaled, noisy and compressed images). While state-of-the-art image restoration methods are based on convolutional neural networks, few attempts have been made with Transformers which show impressive performance on high-level vision tasks. In this paper, we propose a strong baseline model SwinIR for image restoration based on the Swin Transformer. SwinIR consists of three parts: shallow feature extraction, deep feature extraction and high-quality image reconstruction. In particular, the deep feature extraction module is composed of several residual Swin Transformer blocks (RSTB), each of which has several Swin Transformer layers together with a residual connection. We conduct experiments on three representative tasks: image super-resolution (including classical, lightweight and real-world image super-resolution), image denoising (including grayscale and color image denoising) and JPEG compression artifact reduction. Experimental results demonstrate that SwinIR outperforms state-of-the-art methods on different tasks by \${\textbackslash}textbf\{up to 0.14\${\textbackslash}sim\$0.45dB\}\$, while the total number of parameters can be reduced by \${\textbackslash}textbf\{up to 67\%\}\$.},
-	urldate = {2025-12-08},
 	publisher = {arXiv},
 	author = {Liang, Jingyun and Cao, Jiezhang and Sun, Guolei and Zhang, Kai and Van Gool, Luc and Timofte, Radu},
-	year = {2021},
-	note = {Version Number: 1},
-	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Electrical engineering, electronic engineering, information engineering, Image and Video Processing (eess.IV)},
-	annote = {Other
-Sota results on classical/lightweight/real-world image SR, image denoising and JPEG compression artifact reduction. Code: https://github.com/JingyunLiang/SwinIR},
+	year = {2021}
 }
 
 @misc{ledig_photo-realistic_2016,
 	title = {Photo-{Realistic} {Single} {Image} {Super}-{Resolution} {Using} a {Generative} {Adversarial} {Network}},
-	copyright = {arXiv.org perpetual, non-exclusive license},
 	url = {https://arxiv.org/abs/1609.04802},
-	doi = {10.48550/ARXIV.1609.04802},
-	abstract = {Despite the breakthroughs in accuracy and speed of single image super-resolution using faster and deeper convolutional neural networks, one central problem remains largely unsolved: how do we recover the finer texture details when we super-resolve at large upscaling factors? The behavior of optimization-based super-resolution methods is principally driven by the choice of the objective function. Recent work has largely focused on minimizing the mean squared reconstruction error. The resulting estimates have high peak signal-to-noise ratios, but they are often lacking high-frequency details and are perceptually unsatisfying in the sense that they fail to match the fidelity expected at the higher resolution. In this paper, we present SRGAN, a generative adversarial network (GAN) for image super-resolution (SR). To our knowledge, it is the first framework capable of inferring photo-realistic natural images for 4x upscaling factors. To achieve this, we propose a perceptual loss function which consists of an adversarial loss and a content loss. The adversarial loss pushes our solution to the natural image manifold using a discriminator network that is trained to differentiate between the super-resolved images and original photo-realistic images. In addition, we use a content loss motivated by perceptual similarity instead of similarity in pixel space. Our deep residual network is able to recover photo-realistic textures from heavily downsampled images on public benchmarks. An extensive mean-opinion-score (MOS) test shows hugely significant gains in perceptual quality using SRGAN. The MOS scores obtained with SRGAN are closer to those of the original high-resolution images than to those obtained with any state-of-the-art method.},
-	urldate = {2025-12-08},
 	publisher = {arXiv},
 	author = {Ledig, Christian and Theis, Lucas and Huszar, Ferenc and Caballero, Jose and Cunningham, Andrew and Acosta, Alejandro and Aitken, Andrew and Tejani, Alykhan and Totz, Johannes and Wang, Zehan and Shi, Wenzhe},
-	year = {2016},
-	note = {Version Number: 5},
-	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, Machine Learning (stat.ML)},
-	annote = {Other
-19 pages, 15 figures, 2 tables, accepted for oral presentation at CVPR, main paper + some supplementary material},
+	year = {2016}
 }
 
 @incollection{fleet_learning_2014,
-	address = {Cham},
 	title = {Learning a {Deep} {Convolutional} {Network} for {Image} {Super}-{Resolution}},
-	volume = {8692},
-	copyright = {http://www.springer.com/tdm},
-	isbn = {978-3-319-10592-5 978-3-319-10593-2},
-	url = {http://link.springer.com/10.1007/978-3-319-10593-2_13},
-	language = {en},
-	urldate = {2025-12-08},
 	booktitle = {Computer {Vision} – {ECCV} 2014},
 	publisher = {Springer International Publishing},
 	author = {Dong, Chao and Loy, Chen Change and He, Kaiming and Tang, Xiaoou},
-	editor = {Fleet, David and Pajdla, Tomas and Schiele, Bernt and Tuytelaars, Tinne},
 	year = {2014},
-	doi = {10.1007/978-3-319-10593-2_13},
-	note = {Series Title: Lecture Notes in Computer Science},
-	pages = {184--199},
+	pages = {184--199}
 }
+
+@misc{lamXViewObjectsContext2018,
+  title = {{{xView}}: {{Objects}} in {{Context}} in {{Overhead Imagery}}},
+  shorttitle = {{{xView}}},
+  author = {Lam, Darius and Kuzma, Richard and McGee, Kevin and Dooley, Samuel and Laielli, Michael and Klaric, Matthew and Bulatov, Yaroslav and McCord, Brendan},
+  year = 2018,
+  month = feb,
+  number = {arXiv:1802.07856},
+  eprint = {1802.07856},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.1802.07856},
+  urldate = {2025-12-09},
+  abstract = {We introduce a new large-scale dataset for the advancement of object detection techniques and overhead object detection research. This satellite imagery dataset enables research progress pertaining to four key computer vision frontiers. We utilize a novel process for geospatial category detection and bounding box annotation with three stages of quality control. Our data is collected from WorldView-3 satellites at 0.3m ground sample distance, providing higher resolution imagery than most public satellite imagery datasets. We compare xView to other object detection datasets in both natural and overhead imagery domains and then provide a baseline analysis using the Single Shot MultiBox Detector. xView is one of the largest and most varied publicly available object-detection datasets to date, with over 1 million objects across 60 classes in over 1,400 km\textasciicircum 2 of imagery.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {/home/shure/Zotero/storage/MDRLHY7J/Lam et al. - 2018 - xView Objects in Context in Overhead Imagery.pdf;/home/shure/Zotero/storage/TZ2SKR9K/1802.html}
+}
+
+@misc{dosovitskiyImageWorth16x162020,
+  title = {An {{Image}} Is {{Worth}} 16x16 {{Words}}: {{Transformers}} for {{Image Recognition}} at {{Scale}}},
+  shorttitle = {An {{Image}} Is {{Worth}} 16x16 {{Words}}},
+  author = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+  year = 2020,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2010.11929},
+  urldate = {2025-12-09},
+  abstract = {While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.},
+  copyright = {arXiv.org perpetual, non-exclusive license},
+  keywords = {Artificial Intelligence (cs.AI),Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences,Machine Learning (cs.LG)}
+}
+
+@article{zhuEfficientVisionTransformers2025,
+  title = {Efficient Vision Transformers with Edge Enhancement for Robust Small Target Detection in Drone-Based Remote Sensing},
+  author = {Zhu, Xuguang and Zhang, Zhizhao},
+  year = 2025,
+  month = jul,
+  journal = {Frontiers in Remote Sensing},
+  volume = {6},
+  pages = {1599099},
+  issn = {2673-6187},
+  doi = {10.3389/frsen.2025.1599099},
+  urldate = {2025-12-09},
+  abstract = {Small object detection in UAV remote sensing imagery faces significant challenges due to scale variations, background clutter, and real-time processing requirements. This study proposes a lightweight transformer-based detector, MLD-DETR, which enhances detection performance in complex scenarios through multi-scale edge enhancement and hierarchical attention mechanisms. First, a Multi-Scale Edge Enhancement Fusion (MSEEF) module is designed, integrating adaptive pooling and edge-aware convolution to preserve target boundary details while enabling cross-scale feature interaction. Second, a Layered Attention Fusion (LAF) mechanism is developed, leveraging spatial depth-wise convolution and omnidirectional kernel feature fusion to improve hierarchical localization capability for densely occluded targets. Furthermore, a Dynamic Positional Encoding (DPE) module replaces traditional fixed positional embeddings, enhancing spatial perception accuracy under complex geometric perspectives through learnable spatial adapters. Combined with an Inner Generalized Intersection-over-Union (Inner-GIoU) loss function to optimize bounding box geometric consistency, MLD-DETR achieves 36.7\% AP50\% and 14.5\% APs on the VisDrone2019 dataset, outperforming the baseline RT-DETR by 3.2\% and 1.8\% in accuracy while achieving 20\% parameter reduction and maintaining computational efficiency suitable for UAV platforms equipped with modern edge computing hardware. Experimental results demonstrate the algorithm's superior performance in UAV remote sensing applications such as crop disease monitoring and traffic congestion detection, offering an efficient solution for real-time edge-device deployment.}
+}
+
+@misc{mollerLightweightImageSuperResolution2025,
+  title = {A {{Lightweight Image Super-Resolution Transformer Trained}} on {{Low-Resolution Images Only}}},
+  author = {M{\"o}ller, Bj{\"o}rn and G{\"o}rnhardt, Lucas and Fingscheidt, Tim},
+  year = 2025,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2503.23265},
+  urldate = {2025-12-09},
+  abstract = {Transformer architectures prominently lead single-image super-resolution (SISR) benchmarks, reconstructing high-resolution (HR) images from their low-resolution (LR) counterparts. Their strong representative power, however, comes with a higher demand for training data compared to convolutional neural networks (CNNs). For many real-world SR applications, the availability of high-quality HR training images is not given, sparking interest in LR-only training methods. The LR-only SISR benchmark mimics this condition by allowing only low-resolution (LR) images for model training. For a 4x super-resolution, this effectively reduces the amount of available training data to 6.25\% of the HR image pixels, which puts the employment of a data-hungry transformer model into question. In this work, we are the first to utilize a lightweight vision transformer model with LR-only training methods addressing the unsupervised SISR LR-only benchmark. We adopt and configure a recent LR-only training method from microscopy image super-resolution to macroscopic real-world data, resulting in our multi-scale training method for bicubic degradation (MSTbic). Furthermore, we compare it with reference methods and prove its effectiveness both for a transformer and a CNN model. We evaluate on the classic SR benchmark datasets Set5, Set14, BSD100, Urban100, and Manga109, and show superior performance over state-of-the-art (so far: CNN-based) LR-only SISR methods. The code is available on GitHub: https://github.com/ifnspaml/SuperResolutionMultiscaleTraining.},
+  copyright = {Creative Commons Attribution 4.0 International},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences,FOS: Electrical engineering electronic engineering information engineering,Image and Video Processing (eess.IV),Machine Learning (cs.LG)}
+}
+
+@misc{chenHATHybridAttention2025,
+  title = {{{HAT}}: {{Hybrid Attention Transformer}} for {{Image Restoration}}},
+  shorttitle = {{{HAT}}},
+  author = {Chen, Xiangyu and Wang, Xintao and Zhang, Wenlong and Kong, Xiangtao and Qiao, Yu and Zhou, Jiantao and Dong, Chao},
+  year = 2025,
+  month = oct,
+  number = {arXiv:2309.05239},
+  eprint = {2309.05239},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2309.05239},
+  urldate = {2025-12-09},
+  abstract = {Transformer-based methods have shown impressive performance in image restoration tasks, such as image super-resolution and denoising. However, we find that these networks can only utilize a limited spatial range of input information through attribution analysis. This implies that the potential of Transformer is still not fully exploited in existing networks. In order to activate more input pixels for better restoration, we propose a new Hybrid Attention Transformer (HAT). It combines both channel attention and window-based self-attention schemes, thus making use of their complementary advantages. Moreover, to better aggregate the cross-window information, we introduce an overlapping cross-attention module to enhance the interaction between neighboring window features. In the training stage, we additionally adopt a same-task pre-training strategy to further exploit the potential of the model for further improvement. Extensive experiments have demonstrated the effectiveness of the proposed modules. We further scale up the model to show that the performance of the SR task can be greatly improved. Besides, we extend HAT to more image restoration applications, including real-world image super-resolution, Gaussian image denoising and image compression artifacts reduction. Experiments on benchmark and real-world datasets demonstrate that our HAT achieves state-of-the-art performance both quantitatively and qualitatively. Codes and models are publicly available at https://github.com/XPixelGroup/HAT.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {/home/shure/Zotero/storage/KTKHI5UY/Chen et al. - 2025 - HAT Hybrid Attention Transformer for Image Restoration.pdf;/home/shure/Zotero/storage/VU6SGTIX/2309.html}
+}
+
+@inproceedings{duVisDroneDET2019VisionMeets2019,
+  title = {{{VisDrone-DET2019}}: {{The Vision Meets Drone Object Detection}} in {{Image Challenge Results}}},
+  shorttitle = {{{VisDrone-DET2019}}},
+  booktitle = {2019 {{IEEE}}/{{CVF International Conference}} on {{Computer Vision Workshop}} ({{ICCVW}})},
+  author = {Du, Dawei and Zhu, Pengfei and Wen, Longyin and Bian, Xiao and Lin, Haibin and Hu, Qinghua and Peng, Tao and Zheng, Jiayu and Wang, Xinyao and Zhang, Yue and Bo, Liefeng and Shi, Hailin and Zhu, Rui and Kumar, Aashish and Li, Aijin and Zinollayev, Almaz and Askergaliyev, Anuar and Schumann, Arne and Mao, Binjie and Lee, Byeongwon and Liu, Chang and Chen, Changrui and Pan, Chunhong and Huo, Chunlei and Yu, Da and Cong, DeChun and Zeng, Dening and Pailla, Dheeraj Reddy and Li, Di and Wang, Dong and Cho, Donghyeon and Zhang, Dongyu and Bai, Furui and Jose, George and Gao, Guangyu and Liu, Guizhong and Xiong, Haitao and Qi, Hao and Wang, Haoran and Qiu, Heqian and Li, HongLiang and Lu, Huchuan and Kim, Ildoo and Kim, Jaekyum and Shen, Jane and Lee, Jihoon and Ge, Jing and Xu, Jingjing and Zhou, Jingkai and Meier, Jonas and Choi, Jun Won and Hu, Junhao and Zhang, Junyi and Huang, Junying and Huang, Kaiqi and Wang, Keyang and Sommer, Lars and Jin, Lei and Zhang, Lei and Huang, Lianghua and Sun, Lin and Steinmann, Lucas and Jia, Meixia and Xu, Nuo and Zhang, Pengyi and Chen, Qiang and Lv, Qingxuan and Liu, Qiong and Cheng, Qishang and Chennamsetty, Sai Saketh and Chen, Shuhao and Wei, Shuo and Kruthiventi, Srinivas S S and Hong, Sungeun and Kang, Sungil and Wu, Tong and Feng, Tuo and Kollerathu, Varghese Alex and Li, Wanqi and Dai, Wei and Qin, Weida and Wang, Weiyang and Wang, Xiaorui and Chen, Xiaoyu and Chen, Xin and Sun, Xin and Zhang, Xin and Zhao, Xin and Zhang, Xindi and Zhang, Xinyu and Chen, Xuankun and Wei, Xudong and Zhang, Xuzhang and Li, Yanchao and Chen, Yifu and Toh, Yu Heng and Zhang, Yu and Zhu, Yu and Zhong, Yunxin and Wang, Zexin and Wang, Zhikang and Song, Zichen and Liu, Ziming},
+  year = 2019,
+  month = oct,
+  pages = {213--226},
+  publisher = {IEEE},
+  address = {Seoul, Korea (South)},
+  doi = {10.1109/ICCVW.2019.00030},
+  urldate = {2025-12-09},
+  copyright = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html},
+  isbn = {978-1-7281-5023-9},
+  file = {/home/shure/Zotero/storage/9TSFT2IT/Du et al. - 2019 - VisDrone-DET2019 The Vision Meets Drone Object Detection in Image Challenge Results.pdf}
+}
+
+@article{liuSingleimageSuperresolutionUsing2023,
+  title = {Single-image Super-resolution Using Lightweight Transformer-convolutional Neural Network Hybrid Model},
+  author = {Liu, Yuanyuan and Yue, Mengtao and Yan, Han and Zhu, Lu},
+  year = 2023,
+  month = aug,
+  journal = {IET Image Processing},
+  volume = {17},
+  number = {10},
+  pages = {2881--2893},
+  issn = {1751-9659, 1751-9667},
+  doi = {10.1049/ipr2.12833},
+  urldate = {2025-12-09},
+  abstract = {Abstract             With constant advances in deep learning methods as applied to image processing, deep convolutional neural networks (CNNs) have been widely explored in single-image super-resolution (SISR) problems and have attained significant success. These CNN-based methods cannot fully use the internal and external information of the image. The authors add a lightweight Transformer structure to capture this information. Specifically, the authors apply a dense block structure and residual connection to build a residual dense convolution block (RDCB) that reduces the parameters somewhat and extracts shallow features. The lightweight transformer block (LTB) further extracts features and learns the texture details between the patches through the self-attention mechanism. The LTB comprises an efficient multi-head transformer (EMT) with small graphics processing unit (GPU) memory footprint, and benefits from feature preprocessing by multi-head attention (MA), reduction, and expansion. The EMT significantly reduces the use of GPU resources. In addition, a detail-purifying attention block (DAB) is proposed to explore the context information in the high-resolution (HR) space to recover more details. Extensive evaluations of four benchmark datasets demonstrate the effectiveness of the authors' proposed model in terms of quantitative metrics and visual effects. The proposed EMT only uses about 40\% as much GPU memory as other methods, with better performance.},
+  langid = {english},
+  file = {/home/shure/Zotero/storage/CM7TWQV7/Liu et al. - 2023 - Single‐image super‐resolution using lightweight transformer‐convolutional neural network hybrid mode.pdf}
+}
+
+@inproceedings{hui_imdn_2019,
+  title={Lightweight Image Super-Resolution with Information Multi-Distillation Network},
+  author={Hui, Zheng and Gao, Xinbo and Yang, Yunchu and Wang, Xiumei},
+  booktitle={Proceedings of the 27th ACM International Conference on Multimedia},
+  pages={2024--2032},
+  year={2019}
+}
+

@@ -158,3 +158,28 @@
   year={2019}
 }
 
+@misc{sunSpatiallyAdaptiveFeatureModulation2023,
+  title = {Spatially-{{Adaptive Feature Modulation}} for {{Efficient Image Super-Resolution}}},
+  author = {Sun, Long and Dong, Jiangxin and Tang, Jinhui and Pan, Jinshan},
+  year = 2023,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2302.13800},
+  urldate = {2025-12-10},
+  abstract = {Although numerous solutions have been proposed for image super-resolution, they are usually incompatible with low-power devices with many computational and memory constraints. In this paper, we address this problem by proposing a simple yet effective deep network to solve image super-resolution efficiently. In detail, we develop a spatially-adaptive feature modulation (SAFM) mechanism upon a vision transformer (ViT)-like block. Within it, we first apply the SAFM block over input features to dynamically select representative feature representations. As the SAFM block processes the input features from a long-range perspective, we further introduce a convolutional channel mixer (CCM) to simultaneously extract local contextual information and perform channel mixing. Extensive experimental results show that the proposed method is \$3\textbackslash times\$ smaller than state-of-the-art efficient SR methods, e.g., IMDN, in terms of the network parameters and requires less computational cost while achieving comparable performance. The code is available at https://github.com/sunny2109/SAFMN.},
+  copyright = {arXiv.org perpetual, non-exclusive license},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences}
+}
+
+
+@misc{kongResidualLocalFeature2022,
+  title = {Residual {{Local Feature Network}} for {{Efficient Super-Resolution}}},
+  author = {Kong, Fangyuan and Li, Mingxi and Liu, Songwei and Liu, Ding and He, Jingwen and Bai, Yang and Chen, Fangmin and Fu, Lean},
+  year = 2022,
+  publisher = {arXiv},
+  doi = {10.48550/ARXIV.2205.07514},
+  urldate = {2025-12-10},
+  abstract = {Deep learning based approaches has achieved great performance in single image super-resolution (SISR). However, recent advances in efficient super-resolution focus on reducing the number of parameters and FLOPs, and they aggregate more powerful features by improving feature utilization through complex layer connection strategies. These structures may not be necessary to achieve higher running speed, which makes them difficult to be deployed to resource-constrained devices. In this work, we propose a novel Residual Local Feature Network (RLFN). The main idea is using three convolutional layers for residual local feature learning to simplify feature aggregation, which achieves a good trade-off between model performance and inference time. Moreover, we revisit the popular contrastive loss and observe that the selection of intermediate features of its feature extractor has great influence on the performance. Besides, we propose a novel multi-stage warm-start training strategy. In each stage, the pre-trained weights from previous stages are utilized to improve the model performance. Combined with the improved contrastive loss and training strategy, the proposed RLFN outperforms all the state-of-the-art efficient image SR models in terms of runtime while maintaining both PSNR and SSIM for SR. In addition, we won the first place in the runtime track of the NTIRE 2022 efficient super-resolution challenge. Code will be available at https://github.com/fyan111/RLFN.},
+  copyright = {arXiv.org perpetual, non-exclusive license},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV),FOS: Computer and information sciences}
+}
+

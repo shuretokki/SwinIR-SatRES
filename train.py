@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from dataset import SwinIRDataset
+from dataset import kDataset
 from model import SwinIR
 
 from torch.cuda.amp import autocast, GradScaler
@@ -42,9 +42,7 @@ def train(args):
     print(f"Data - HR: {HR_DIR}, LR: {LR_DIR}")
     print(f"Config - Patch: {PATCH_SIZE}, Batch: {BATCH_SIZE}, Epochs: {EPOCHS}")
 
-    # dataset setup
-    # turn off debug mode for actual training run
-    train_dataset = SwinIRDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE, upscale_factor=args.upscale)
+    train_dataset = kDataset(hr_dir=HR_DIR, lr_dir=LR_DIR, debug_mode=False, patch_size=PATCH_SIZE, upscale_factor=args.upscale)
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True, persistent_workers=True)
 
     model = SwinIR(depths=[6, 6, 6, 6], embed_dim=60, num_heads=[6, 6, 6, 6], upscale=args.upscale)

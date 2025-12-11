@@ -1,11 +1,3 @@
-"""
-SwinIR Dataset Loader.
-
-This module defines the PyTorch Dataset class for loading and processing
-High-Resolution (HR) and Low-Resolution (LR) image pairs for super-resolution training.
-It handles random patching and geometric augmentations (flips/rotations).
-"""
-
 import os
 import glob
 import random
@@ -15,10 +7,7 @@ from torchvision import transforms
 import torchvision.transforms.functional as TF
 from PIL import Image
 
-class SwinIRDataset(Dataset):
-    """
-    A PyTorch Dataset for loading HR/LR image pairs.
-    """
+class kDataset(Dataset):
     def __init__(self, hr_dir, lr_dir, debug_mode=False, patch_size=None, upscale_factor=2):
         """
         Args:
@@ -113,7 +102,7 @@ if __name__ == "__main__":
 
     print(f"[INFO] Initializing dataset...\nHR: {hr_path}\nLR: {lr_path}")
 
-    train_ds = SwinIRDataset(hr_dir=hr_path, lr_dir=lr_path, debug_mode=True, patch_size=48)
+    train_ds = kDataset(hr_dir=hr_path, lr_dir=lr_path, debug_mode=True, patch_size=48)
     print(f"[INFO] Dataset size: {len(train_ds)}")
 
     if len(train_ds) > 0:
